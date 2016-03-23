@@ -1,3 +1,8 @@
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 
 public class Solution {
 	
@@ -18,5 +23,31 @@ public class Solution {
     public boolean isBalanced(TreeNode root) {
         int dummy = depth(root);
         return this.Balanced;
+    }
+    /*
+     * 102. Binary Tree Level Order Traversal
+     */
+    List<List<Integer>> ll = new ArrayList<List<Integer>>();
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        if(root==null) return ll;
+        Queue<List<TreeNode>> q = new LinkedList<List<TreeNode>>();        
+        
+         List<TreeNode> ln = new ArrayList<TreeNode>();
+       ln.add(root);
+        q.add(ln);
+        while(!q.isEmpty())
+        {
+        	List<TreeNode> levelNodes = q.remove();
+        	List<Integer> l = new ArrayList<Integer>();
+        	 ln = new ArrayList<TreeNode>();
+        	for(TreeNode n: levelNodes)
+        	{
+        	    l.add(n.val);
+                ln.add(n);
+        	}
+            q.add(ln);
+            if(!l.isEmpty()) ll.add(l);
+        }
+        return ll;
     }
 }
