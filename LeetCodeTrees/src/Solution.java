@@ -118,5 +118,31 @@ public class Solution {
         public TreeNode sortedArrayToBST(int[] nums) {
             return createTree(nums,0,nums.length-1);
             
-        }        
+        }    
+        
+ /*
+  * 105. Construct Binary Tree from Preorder and Inorder Traversal
+  */
+        private int i=0;
+        private TreeNode built(int[] pr, int[] in,int st, int end )
+        {
+            if(i>=in.length||st>end) return null;
+            TreeNode node = new TreeNode(pr[i]);
+            int j=find(in,pr[i],st, end);
+            if(j==-1) return node;
+            i++;
+            node.left = built(pr,in,st,j-1);
+            node.right = built(pr,in,j+1,end);
+            
+            return node;
+        }
+        private int find(int[] in , int val,int st, int end)
+        {
+            for(int i=st;i<=end;i++)
+            if(in[i] ==val)return i;
+            return -1;
+        }
+        public TreeNode buildTree(int[] preorder, int[] inorder) {
+            return built(preorder,inorder,0,preorder.length-1);
+        }
 }
