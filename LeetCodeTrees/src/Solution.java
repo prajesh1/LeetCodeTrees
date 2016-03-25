@@ -50,4 +50,27 @@ public class Solution {
         }
         return ll;
     }
+    /*
+     * 235. Lowest Common Ancestor of a Binary Search Tree
+     * Ancestor is the place where both dont follow same ways
+     * Either beacuse they are opposite sides of node or 1 has value
+     * of node.
+     */
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+      if(p==q||p.val==q.val) return p;
+      int less = Math.min(p.val,q.val);
+      int more = Math.max(p.val,q.val);
+      TreeNode lca = root;
+      TreeNode node = root;
+      while(node!=null)
+      {
+          lca = node;
+          if(less<node.val&&more<node.val)
+          node = node.left;
+          else if(less>node.val&&more>node.val)
+          node = node.right;
+          else break;
+      }
+      return lca;
+  }
 }
